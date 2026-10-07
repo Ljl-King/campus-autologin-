@@ -1,0 +1,89 @@
+{
+  "_说明": [
+    "================================================================",
+    " 校园网自动登录程序 —— 配置文件",
+    "================================================================",
+    " 使用方法：",
+    "   1) 把本文件复制一份，改名为  config.json（放在同一个 config 目录下）",
+    "   2) 用记事本打开 config.json",
+    "   3) 按下面的说明，把带「这里填」字样的值改成你自己的信息",
+    "   4) 保存后即可运行",
+    "",
+    " 重要：config.json 属于个人隐私文件，请不要发给别人或上传到网上。",
+    "",
+    " 格式提醒：这是 JSON 格式，",
+    "   - 必须使用英文双引号 \" \"，不能用中文引号 “ ”",
+    "   - 最后一项后面不要多加逗号",
+    "================================================================"
+  ],
+
+  "portal": {
+    "base_url": "这里填你的门户地址",
+    "_base_url说明": "学校认证门户的地址。就是浏览器打开认证页面时的地址，结尾不要带 /index.html。格式例子：http:// 加上门户域名或地址，冒号加端口（默认 80 端口可省略）",
+
+    "query": "",
+    "_query说明": "AC 跳转参数。一般留空不动；如果程序提示返回 255/ARG，就把认证页地址栏 ? 后面的内容整段填到这里",
+
+    "paths": {
+      "_paths说明": "各接口的路径，通常不用修改。不同学校的门户若路径不同，可在此调整",
+      "login": "api/login.php",
+      "stat": "api/stat.php",
+      "ack": "api/ack_auth.php",
+      "logoff": "api/logoff.php",
+      "getacct": "api/getacct.php",
+      "crypto": "assets/js/crypto.js",
+      "home": "index.html"
+    }
+  },
+
+  "account": {
+    "username": "这里填你的学号",
+    "_username说明": "你的学号或工号，通常是一串数字。直接替换上面那行引号里的内容即可",
+
+    "password": "这里填你的密码",
+    "_password说明": "你的密码。填明文即可，程序会用门户的算法自动加密后再提交",
+
+    "pool": "",
+    "_pool说明": "运营商线路。不需要选择就留空；若学校要求选（电信/联通/移动），填对应数字如 \"1\"",
+
+    "isp_id": "0",
+    "_isp_id说明": "运营商编号，一般保持 0",
+
+    "authmode": "0",
+    "_authmode说明": "认证模式，普通学号登录保持 0"
+  },
+
+  "keepalive": {
+    "_keepalive说明": "连接保活参数，用默认值即可，网络不稳定时可按说明微调",
+    "check_interval": 30,
+    "_check_interval说明": "每隔多少秒检查一次网络是否正常",
+    "connect_timeout": 8,
+    "_connect_timeout说明": "单次网络请求的超时时间（秒）",
+    "retry_interval": 10,
+    "_retry_interval说明": "登录失败后隔多少秒重试一次",
+    "offline_trigger": 2,
+    "_offline_trigger说明": "连续几次检测失败才判定为掉线。网络经常抖动时改成 3 更稳",
+    "session_check": 300,
+    "_session_check说明": "在线时每隔多少秒核对一次门户登录状态。填 0 表示不核对",
+    "connect_test_url": "http://www.msftconnecttest.com/connecttest.txt",
+    "_connect_test_url说明": "用来判断能否上网的小文件地址。学校内网若有更稳定的地址可替换",
+    "connect_test_expect": "Microsoft Connect Test",
+    "_connect_test_expect说明": "上面那个文件应该返回的内容。必须包含这段文字才算上网成功"
+  },
+
+  "crypto": {
+    "_crypto说明": "口令加密相关设置，一般保持默认即可",
+    "key": "",
+    "_key说明": "加密密钥。留空则由程序自动从门户的加密脚本中解析；解析失败时才需要手动填写",
+    "algorithm": "VDX",
+    "_algorithm说明": "加密算法名称，raas 门户为 VDX，通常不用改",
+    "encoding": "hex"
+  },
+
+  "runtime": {
+    "verbose": true,
+    "_verbose说明": "前台运行时是否在屏幕上显示日志",
+    "log_max_bytes": 1048576,
+    "_log_max_bytes说明": "日志文件大小上限（字节），超过后自动轮换"
+  }
+}
